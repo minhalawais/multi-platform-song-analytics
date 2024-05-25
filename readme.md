@@ -1,65 +1,81 @@
-Project README: Song Analytics
+# Songs Data Analysis
 
-Overview:
-This project focuses on collecting and analyzing data related to songs, including YouTube views, Anghami plays, and Spotify streams. It utilizes various APIs and web scraping techniques to extract relevant information and store it in a structured format.
+This project aims to analyze the views and streams of songs from multiple platforms, including YouTube, Spotify, and Anghami. The data is read from Excel files, and various web scraping and API techniques are used to gather the necessary information.
 
-Project Components:
-youtubeviews.xlsx:
+## Prerequisites
 
-This Excel file contains data related to songs, including the song name, artist name, YouTube link, Anghami link, and Spotify link.
-songs.xlsx:
+- Python 3.x
+- `pandas` library
+- `spotipy` library
+- `requests` library
+- `BeautifulSoup` library
+- `youtubesearchpython` library
+- `html5lib` library
 
-Another Excel file used for storing the analytics data, including Spotify streams.
-get_spotify_track_link:
+## Installation
 
-A function that retrieves the Spotify link for a given song and artist using the Spotify API.
-get_spotify_views:
+1. Clone the repository to your local machine.
 
-A function that extracts the number of Spotify streams for a given song using web scraping techniques.
-get_youtube_views:
+2. Install the required Python libraries:
+    ```sh
+    pip install pandas spotipy requests beautifulsoup4 youtubesearchpython html5lib
+    ```
 
-A function that retrieves the number of YouTube views for a given video link using the youtubesearchpython library.
-get_anghami_views:
+3. Obtain Spotify API credentials:
+    - Create a new app on the Spotify Developer Dashboard.
+    - Note the `client_id` and `client_secret` from your app settings.
 
-A function that extracts the number of Anghami plays for a given song using web scraping techniques.
-__main__ Block:
+## Usage
 
-Reads the data from youtubeviews.xlsx and songs.xlsx.
-Iterates through the data, fetching YouTube views, Anghami plays, and Spotify streams for each song.
-Updates the songs.xlsx file with the collected Spotify streams data.
-How to Use:
-Dependencies Installation:
+1. Place your Excel files in the specified directory paths. The Excel files should have the following structure:
+    - `youtubeviews.xlsx` should contain columns: `Song Name`, `Artist Name`, `Youtube link`, `Anghami Link`, `Spotify Link`
+    - `songs.xlsx` should contain a column: `Spotify streams`
 
-Install the required Python libraries using the following:
-bash
-Copy code
-pip install youtubesearchpython urllib pandas spotipy requests beautifulsoup4
-Spotify API Credentials:
+2. Modify the script with your Spotify API credentials:
+    ```python
+    client_id = 'your_spotify_client_id'
+    client_secret = 'your_spotify_client_secret'
+    ```
 
-You need to have Spotify API credentials to run the script successfully. Replace the placeholders in the get_spotify_track_link function with your actual credentials.
-Execution:
+3. Run the script:
+    ```sh
+    python your_script_name.py
+    ```
 
-Run the script:
-bash
-Copy code
-python script_name.py
-Ensure that both youtubeviews.xlsx and songs.xlsx are in the specified paths.
-Notes:
-Web Scraping:
+## Functions
 
-Web scraping is used to extract data from Spotify and Anghami. Ensure that you are compliant with the terms of service of these platforms.
-Spotify API:
+### get_spotify_track_link(song_name, artist_name)
+Searches for a track on Spotify using the song name and artist name, and returns the Spotify track link.
 
-The Spotify API is used to fetch Spotify track links. Make sure to replace the placeholder credentials with your own.
-Excel Files:
+### get_spotify_views(song_link, song_name)
+Fetches the number of views/streams for a given Spotify track link and song name.
 
-The script reads data from youtubeviews.xlsx and updates songs.xlsx with Spotify streams information.
-Additional Considerations:
-Error Handling:
+### get_youtube_views(song_link)
+Fetches the number of views for a given YouTube video link using `youtubesearchpython`.
 
-The script includes error-handling mechanisms for network-related issues and unsuccessful requests.
-Data Availability:
+### get_anghami_views(song_link)
+Fetches the number of views for a given Anghami track link.
 
-Ensure that the YouTube, Anghami, and Spotify links provided in the input data are accessible and valid.
-Author:
-Minhal Awais
+## Main Script
+
+The main script reads data from the Excel files, processes each song to fetch the views and streams from various platforms, and updates the Excel files with the gathered information.
+
+## Example Output
+
+The script will output the number of songs found and not found with Spotify views in the Excel file. It will also print the updated DataFrame.
+
+## Notes
+
+- Ensure you have the necessary permissions to access the API and web scraping functionalities.
+- Be aware of the rate limits for the APIs and handle retries appropriately.
+
+## License
+
+This project is licensed under the MIT License.
+
+## Acknowledgments
+
+- [Spotify API](https://developer.spotify.com/documentation/web-api/)
+- [YouTube Data API](https://developers.google.com/youtube/v3)
+- [BeautifulSoup Documentation](https://www.crummy.com/software/BeautifulSoup/bs4/doc/)
+- [youtubesearchpython Documentation](https://github.com/alexmercerind/youtube-search-python)
